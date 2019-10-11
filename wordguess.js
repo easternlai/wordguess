@@ -5,7 +5,28 @@ var wordArray = ["javascript", "responsive", "browser", "computer",
 
 
 var testWord = [{letter:"c", chosen:false}, {letter:"a",chosen:false},{letter:"t", chosen:false}];
-var maxGuess = 5;
+var guesses = 5;
+
+
+
+wordPrint(testWord);
+remainingGuesses(testWord);
+
+
+document.onkeyup = function(event){
+    var userGuess = event.key;
+
+    for(i=0; i < testWord.length; i++){
+        if(userGuess == testWord[i].letter){
+            testWord[i].chosen = true;
+        }
+
+    }
+    guesses--;
+    wordPrint(testWord);
+    console.log(endGame(testWord));
+    remainingGuesses(testWord);
+}
 
 function wordPrint(word){
     document.getElementById("hidden-word").textContent = "";
@@ -20,21 +41,16 @@ function wordPrint(word){
 
 }
 
-wordPrint(testWord);
-wordPrint(testWord);
-wordPrint(testWord);
-
-document.onkeyup = function(event){
-    var userGuess = event.key;
-
-    for(i=0; i < testWord.length; i++){
-    if(userGuess == testWord[i].letter){
-        testWord[i].chosen = true;
-        console.log(testWord[i].letter);
+function endGame (currentWord){
+    for (i = 0; i < currentWord.length; i++){
+        if (currentWord[i].chosen === false){
+             return false;
+        }
     }
+        return true;
+}
 
-    }
-    maxGuess--;
-    console.log(maxGuess);
-    wordPrint(testWord);
+function remainingGuesses (){
+    document.getElementById("attempts-remaining").textContent = guesses;
+    
 }
