@@ -2,7 +2,8 @@ var wordArray = ["javascript", "responsive", "browser", "computer",
 "markup", "styles", "margin", "debug", "coditionals", "console", 
 "array", "loop", "function"];
 
-var testWord = [{letter:"c", chosen:false}, {letter:"a",chosen:false},{letter:"t", chosen:false}];
+// var randWord = wordPicker(word);
+var testWord = [{letter:"a", chosen:false}, {letter:"a",chosen:false},{letter:"t", chosen:false}];
 var guesses = 5;
 var winsTotal = 0;
 var lettersUsed = [];
@@ -13,14 +14,17 @@ wins();
 
 document.onkeyup = function(event){
     var userGuess = event.key;
-
+    var keepGuess=false;
     for(i=0; i < testWord.length; i++){
         if(userGuess == testWord[i].letter){
             testWord[i].chosen = true;
+            keepGuess=true;
+            
         }
     }
-
-    guesses--;
+    if(keepGuess===false){
+        guesses--;
+    }
     wordPrint(testWord);
     remainingGuesses(testWord);
     addLetter(userGuess);
@@ -28,7 +32,6 @@ document.onkeyup = function(event){
 
     if(endGame(testWord)){
         wordPrint(testWord);
-        alert("you have won");
         resetGame();
     } 
 }
@@ -50,13 +53,16 @@ function wordPrint(word){
 }
 
 function endGame (currentWord){
+    
     for (i = 0; i < currentWord.length; i++){
         if (currentWord[i].chosen === false){
              return false;
         }
     }
+        
         winsTotal++;
         wins();
+            alert("You Win!!!");
         return true;
 }
 
@@ -74,12 +80,11 @@ function wins(){
     document.getElementById("wins-total").textContent = x;
 }
 
-function resetGame(){
-   testWord = [{letter:"c", chosen:false}, {letter:"a",chosen:false},{letter:"t", chosen:false}];
-   lettersUsed = [];
-   guesses = 5;
-   wordPrint(testWord);
+function resetGame() {
+    testWord = [{letter:"a", chosen:false}, {letter:"a",chosen:false},{letter:"t", chosen:false}];
+    lettersUsed = [];
+    guesses = 5;
+    wordPrint(testWord);
     remainingGuesses(testWord);
     wins();
-
 }
