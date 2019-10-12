@@ -1,7 +1,7 @@
 //Creates an array of strings
-var wordArray = ["javascript", "responsive", "browser", "computer", 
-"markup", "styles", "margin", "debug", "coditionals", "console", 
-"array", "loop", "function"];
+var wordArrayOrg = ["javascript", "jquery", "functions", "conditionals", "arrays", "stylesheet", "value", "responsiveness", "berkeley", "bootcamp"];
+
+var wordArray = wordArrayOrg;
 
 //defines valid keys user can press.
 var validKey = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
@@ -131,11 +131,19 @@ function resetGame() {
 }
 
 function wordPicker(array){
-    var randWord = array[Math.floor(Math.random() * array.length)];
-    var wordKey = {};
-    var arrayHolder = [];
-    for (i=0; i<randWord.length; i++){
-        arrayHolder[i] = {letter: randWord[i], chosen:false};
-    }
-    return arrayHolder;
+    console.log(array.length);
+        if(wordArray.length == 0){  
+            alert("no more words in database");
+
+        }
+
+        var index = Math.floor(Math.random() * array.length);
+        var randWord = array[index];
+        array.splice(index, 1);
+        var wordKey = {};
+        var arrayHolder = [];
+        for (i=0; i<randWord.length; i++){
+            arrayHolder[i] = {letter: randWord[i], chosen:false};
+        }
+        return arrayHolder;    
 }
