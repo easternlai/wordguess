@@ -1,23 +1,44 @@
 body {
-    background-color: yellowgreen;
+
     font-size: 2em;
+    font-family: 'Baloo Bhai', cursive;
 }
 
 .header{
     margin: auto;
     text-align: center;
     padding-bottom: 20px;
-    font-size: 2em;
+    font-size: 3.5em;
+    font-family: 'Fascinate Inline', cursive;
 }
 
 .guess-div{
     padding-left: 200px;
+    padding-top: 50px;
     margin-bottom: 200px;
     font-size: 1.5em;
 }
 
+.hidden-word{
+    font-size: 2em;
+}
+
 #start-game{
     margin: auto;
-    text-align: center;
-    background-color: yellowgreen;
+    text-align: center;    
+}
+
+.score-wrapper {
+    background-color: aqua;
+    font-size: .7em;
+    width: 300px;
+    padding: 15px 15px 15px 15px;
+    border: 5px solid black ;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+#hidden-word{
+    font-size: 100px;
 }

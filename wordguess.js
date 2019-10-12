@@ -1,42 +1,74 @@
+//Creates an array of strings
 var wordArray = ["javascript", "responsive", "browser", "computer", 
 "markup", "styles", "margin", "debug", "coditionals", "console", 
 "array", "loop", "function"];
 
-// var randWord = wordPicker(word);
+//defines valid keys user can press.
+var validKey = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+// declares necessary variables
 var guesses = 5;
 var winsTotal = 0;
 var lettersUsed = [];
 var currentWord = [];
+var startGame = true;
 
-currentWord = wordPicker(wordArray);
-wordPrint(currentWord);
-remainingGuesses(currentWord);
-wins();
+
+
+//series of function calls necessary to begin program.
+
+document.getElementById("start-game").textContent="Press any key to start";
 
 document.onkeyup = function(event){
+    if(startGame === true){
+        currentWord = wordPicker(wordArray);
+        wordPrint(currentWord);
+        remainingGuesses(currentWord);
+        wins();
+        startGame= false;
+        document.getElementById("start-game").textContent="";
+    }
+    else{
+        var userGuess = event.key;
 
+        //inputs user guess to variable, verifies key is valid character   
+        if(validKey.includes(userGuess)){
 
+        //variable used to allow user to keep their guess if guess is correct
+            var keepGuess=false;
 
-    var userGuess = event.key;
-    var keepGuess=false;
-    for(i=0; i < currentWord.length; i++){
-        if(userGuess == currentWord[i].letter){
-            currentWord[i].chosen = true;
-            keepGuess=true; 
+            //changes value of user guess to true if the user guess is correct
+            for(i=0; i < currentWord.length; i++){
+                if(userGuess == currentWord[i].letter){
+                    currentWord[i].chosen = true;
+                    keepGuess=true; 
+                }
+        }
+
+            //decrements user guess if incorrect
+            if(keepGuess===false){
+                guesses--;
+            }
+
+            //prints word to screen
+            wordPrint(currentWord);
+
+            //calculates remaining guesses
+            remainingGuesses(currentWord);
+
+            //displays letter to user
+            addLetter(userGuess);
+
+            //displays wins count
+            wins();
+
+            //determines if game is over, resets game.
+            if(endGame(currentWord)){
+                wordPrint(currentWord);
+                resetGame();
+            } 
         }
     }
-    if(keepGuess===false){
-        guesses--;
-    }
-    wordPrint(currentWord);
-    remainingGuesses(currentWord);
-    addLetter(userGuess);
-    wins();
-
-    if(endGame(currentWord)){
-        wordPrint(currentWord);
-        resetGame();
-    } 
 }
 
 
@@ -78,10 +110,10 @@ function remainingGuesses (){
 }
 
 function addLetter (x){
-    //document.getElementById("h1-letters-used").textContent = "Letters Used:  ";  
     lettersUsed.push(x);
     document.getElementById("letters-used").textContent += lettersUsed[lettersUsed.length -1] + " ";   
 }
+
 
 function wins(){
     var x = winsTotal;
