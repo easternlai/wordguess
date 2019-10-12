@@ -15,7 +15,7 @@ body {
 .guess-div{
     padding-left: 200px;
     padding-top: 50px;
-    margin-bottom: 200px;
+    margin-bottom: 150px;
     font-size: 1.5em;
 }
 
@@ -41,4 +41,27 @@ body {
 
 #hidden-word{
     font-size: 100px;
+}
+
+@media screen and (max-width: 768px){
+    .header {
+        font-size: 1.8em;
+    }
+
+    .guess-div{
+        padding: 20px 10px;
+        margin-bottom: 50px;
+        font-size: .8em;
+        text-align: center;
+    }
+    .score-wrapper{
+        box-sizing: border-box;
+        width: 100%;
+        bottom: 0px;
+        right: 0px;
+        padding: 10px;
+        font-size: .7em;
+        
+    }
+
 }
