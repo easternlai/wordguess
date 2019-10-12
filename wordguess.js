@@ -3,35 +3,38 @@ var wordArray = ["javascript", "responsive", "browser", "computer",
 "array", "loop", "function"];
 
 // var randWord = wordPicker(word);
-var testWord = [{letter:"a", chosen:false}, {letter:"a",chosen:false},{letter:"t", chosen:false}];
 var guesses = 5;
 var winsTotal = 0;
 var lettersUsed = [];
+var currentWord = [];
 
-wordPrint(testWord);
-remainingGuesses(testWord);
+currentWord = wordPicker(wordArray);
+wordPrint(currentWord);
+remainingGuesses(currentWord);
 wins();
 
 document.onkeyup = function(event){
+
+
+
     var userGuess = event.key;
     var keepGuess=false;
-    for(i=0; i < testWord.length; i++){
-        if(userGuess == testWord[i].letter){
-            testWord[i].chosen = true;
-            keepGuess=true;
-            
+    for(i=0; i < currentWord.length; i++){
+        if(userGuess == currentWord[i].letter){
+            currentWord[i].chosen = true;
+            keepGuess=true; 
         }
     }
     if(keepGuess===false){
         guesses--;
     }
-    wordPrint(testWord);
-    remainingGuesses(testWord);
+    wordPrint(currentWord);
+    remainingGuesses(currentWord);
     addLetter(userGuess);
     wins();
 
-    if(endGame(testWord)){
-        wordPrint(testWord);
+    if(endGame(currentWord)){
+        wordPrint(currentWord);
         resetGame();
     } 
 }
@@ -53,13 +56,17 @@ function wordPrint(word){
 }
 
 function endGame (currentWord){
-    
+    if(guesses == 0){
+        alert("You lose!!!");
+        resetGame();
+    }
+
     for (i = 0; i < currentWord.length; i++){
         if (currentWord[i].chosen === false){
              return false;
         }
     }
-        
+
         winsTotal++;
         wins();
             alert("You Win!!!");
@@ -71,6 +78,7 @@ function remainingGuesses (){
 }
 
 function addLetter (x){
+    //document.getElementById("h1-letters-used").textContent = "Letters Used:  ";  
     lettersUsed.push(x);
     document.getElementById("letters-used").textContent += lettersUsed[lettersUsed.length -1] + " ";   
 }
@@ -81,10 +89,21 @@ function wins(){
 }
 
 function resetGame() {
-    testWord = [{letter:"a", chosen:false}, {letter:"a",chosen:false},{letter:"t", chosen:false}];
+    currentWord = wordPicker(wordArray);
     lettersUsed = [];
+    document.getElementById("letters-used").textContent = "";
     guesses = 5;
-    wordPrint(testWord);
-    remainingGuesses(testWord);
+    wordPrint(currentWord);
+    remainingGuesses(currentWord);
     wins();
+}
+
+function wordPicker(array){
+    var randWord = array[Math.floor(Math.random() * array.length)];
+    var wordKey = {};
+    var arrayHolder = [];
+    for (i=0; i<randWord.length; i++){
+        arrayHolder[i] = {letter: randWord[i], chosen:false};
+    }
+    return arrayHolder;
 }
