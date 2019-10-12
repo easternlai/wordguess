@@ -1,0 +1,23 @@
+body {
+    background-color: yellowgreen;
+    font-size: 2em;
+}
+
+.header{
+    margin: auto;
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 2em;
+}
+
+.guess-div{
+    padding-left: 200px;
+    margin-bottom: 200px;
+    font-size: 1.5em;
+}
+
+#start-game{
+    margin: auto;
+    text-align: center;
+    background-color: yellowgreen;
+}
